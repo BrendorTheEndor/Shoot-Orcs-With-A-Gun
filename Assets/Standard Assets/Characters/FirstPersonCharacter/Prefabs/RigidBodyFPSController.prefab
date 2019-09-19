@@ -336,6 +336,11 @@ MonoBehaviour:
   weaponRange: 100
   weaponDamagePerShot: 10
   muzzleFlash: {fileID: 4144794765554172081}
+  timeBetweenShots: 0.1
+  fireSFX: {fileID: 8300000, guid: 38f86a0e2e63f814d90ca5f10a4ee16c, type: 3}
+  fireVolume: 0.2
+  hitEffect: {fileID: 4011150849173650189, guid: 007ab3f6c5dca67458f1de4c18a1705f,
+    type: 3}
 --- !u!1 &1187243834675455770
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +438,36 @@ PrefabInstance:
     - target: {fileID: 4907130060635364, guid: 6273e2936e9d6a24e9f64c7c70d6bd19, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126918, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0062
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126918, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.017
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126918, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.2234
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126919, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 0.35636768
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126919, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779833803224126919, guid: 6273e2936e9d6a24e9f64c7c70d6bd19,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.g
+      value: 0.8031938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6273e2936e9d6a24e9f64c7c70d6bd19, type: 3}

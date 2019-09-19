@@ -9,18 +9,26 @@ public class Weapon : MonoBehaviour {
     [SerializeField] float weaponRange = 100f;
     [SerializeField] float weaponDamagePerShot = 10f;
     [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] float fireRate = 1f;
+    //[SerializeField] ParticleSystem bulletTrail;
+    [SerializeField] float timeBetweenShots = 1f;
+    [SerializeField] AudioClip fireSFX;
+    [SerializeField] float fireVolume = 1f;
+    [SerializeField] GameObject hitEffect;
+
+    // Used to cap fire rate
+    Coroutine firingCorutine;
 
     void Start() {
-
+        GetComponent<Animator>().SetBool("isShooting", false);
     }
 
     void Update() {
         if(Input.GetButtonDown("Fire1")) {
-            Shoot();
+            firingCorutine = StartCoroutine(FireContinuously());
         }
-        else {
+        if(Input.GetButtonUp("Fire1")) {
             GetComponent<Animator>().SetBool("isShooting", false);
+            StopCoroutine(firingCorutine);
         }
     }
 
@@ -32,22 +40,35 @@ public class Weapon : MonoBehaviour {
     private void PlayVFX() {
         GetComponent<Animator>().SetBool("isShooting", true);
         muzzleFlash.Play();
+        //bulletTrail.Play();
+        AudioSource.PlayClipAtPoint(fireSFX, Camera.main.transform.position, fireVolume);
     }
 
     private void ProccessShot() {
-        // What we his with the cast
+        // What we hit with the cast
         RaycastHit hit;
 
         // First is where to shoot the ray from, next is what direction, then what we hit, and finally the range
         if(Physics.Raycast(firstPersonCamera.transform.position, firstPersonCamera.transform.forward, out hit, weaponRange)) { // If we hit something
-            Debug.Log("Hit " + hit.transform.name);
-            // TODO: add a hitspark
+            CreateHitImpact(hit);
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-
             if(target == null) { return; } // protects against null reference
-
             target.TakeDamage(weaponDamagePerShot);
         }
         else { return; } // protects against null reference
+    }
+
+    private void CreateHitImpact(RaycastHit hit) {
+        // Make the hit effect, at the point where hit, in direction of normal of the hit
+        GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impact, .1f);
+    }
+
+    IEnumerator FireContinuously() {
+        while(true) { // Infinite loop to always fire while button held
+            PlayVFX();
+            ProccessShot();
+            yield return new WaitForSeconds(timeBetweenShots);
+        }
     }
 }
