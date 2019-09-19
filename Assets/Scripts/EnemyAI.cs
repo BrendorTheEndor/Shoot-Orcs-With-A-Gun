@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,22 +13,40 @@ public class EnemyAI : MonoBehaviour {
 
     NavMeshAgent myNavMeshAgent;
     float distanceToTarget = Mathf.Infinity;
-    bool chaseTriggered = false;
+    bool enemyTriggered = false;
 
     void Start() {
         myNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // If target not in range, do nothing, if target is in range, then chase (can't unagro)
+    // If target not in range, do nothing, if target is in range, then chase (can't unaggro)
     void Update() {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if(distanceToTarget <= chaseRange) {
-            chaseTriggered = true;
+            enemyTriggered = true;
         }
-        if(chaseTriggered) {
-            myNavMeshAgent.SetDestination(target.position);
+        if(enemyTriggered) {
+            TriggerEnemy();
         }
     }
+
+    private void TriggerEnemy() {
+        if(distanceToTarget >= myNavMeshAgent.stoppingDistance) {
+            ChaseTarget();
+        }
+        if(distanceToTarget <= myNavMeshAgent.stoppingDistance) {
+            AttackTarget();
+        }
+    }
+
+    private void ChaseTarget() {
+        myNavMeshAgent.SetDestination(target.position);
+    }
+
+    private void AttackTarget() {
+        Debug.Log("Player has been hit");
+    }
+
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
