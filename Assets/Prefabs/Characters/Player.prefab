@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3152497683359825721}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +342,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c29fbbf2fbc9c2438750370e9734716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 50
+  ammoSlots:
+  - ammoType: 0
+    currentAmmo: 50
+  - ammoType: 1
+    currentAmmo: 15
+  - ammoType: 2
+    currentAmmo: 10
 --- !u!114 &2368177899933460978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2000000}
   playerController: {fileID: 11400004}
-  zoomAmount: 60
+  zoomAmount: 30
   zoomPerFrame: 5
   lowestSensitivity: 0.5
 --- !u!1 &1187243834675455770
@@ -406,7 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582ddd162cea1e64d9c199027eac488f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 0
 --- !u!1001 &802485170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -417,6 +422,10 @@ PrefabInstance:
     - target: {fileID: 1236257789494122, guid: 8b0b86b42def11849a8eba21f4a6a684, type: 3}
       propertyPath: m_Name
       value: Bennelli_M4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236257789494122, guid: 8b0b86b42def11849a8eba21f4a6a684, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4243371153570508, guid: 8b0b86b42def11849a8eba21f4a6a684, type: 3}
       propertyPath: m_LocalPosition.x
@@ -502,6 +511,10 @@ PrefabInstance:
     - target: {fileID: 1117582899397640, guid: 689946d975a0e55449b1e7ae41933e73, type: 3}
       propertyPath: m_Name
       value: M4_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117582899397640, guid: 689946d975a0e55449b1e7ae41933e73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4035219142733080, guid: 689946d975a0e55449b1e7ae41933e73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -590,11 +603,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 342615212078818854}
     m_Modifications:
-    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
-        type: 3}
-      propertyPath: m_Name
-      value: Uzi
-      objectReference: {fileID: 0}
     - target: {fileID: 5930757513950120754, guid: a2947cb00894fc5458deb0f343308a31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,6 +657,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.096
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
+        type: 3}
+      propertyPath: m_Name
+      value: Uzi
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894669885966836444, guid: a2947cb00894fc5458deb0f343308a31,
         type: 3}

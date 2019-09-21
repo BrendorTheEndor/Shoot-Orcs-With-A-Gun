@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] Ammo ammoSlot;
 
     [Header("Weapon Attributes")]
+    [SerializeField] AmmoType ammoType;
     [SerializeField] float weaponRange = 100f;
     [SerializeField] float minWeaponDamagePerShot = 10f;
     [SerializeField] float maxWeaponDamagePerShot = 10f;
@@ -18,7 +19,6 @@ public class Weapon : MonoBehaviour {
     [SerializeField] float timeBetweenShots = 1f;
 
     [Header("Effects")]
-    [SerializeField] int weaponType = 0;
     [SerializeField] ParticleSystem muzzleFlash;
     //[SerializeField] ParticleSystem bulletTrail;
     [SerializeField] AudioClip fireSFX;
@@ -47,13 +47,13 @@ public class Weapon : MonoBehaviour {
     }
 
     void Update() {
-        if(weaponType == 0) {
+        if(ammoType == AmmoType.SmallBullets) {
             ProcessAutoFire();
         }
-        else if(weaponType == 1) {
+        else if(ammoType == AmmoType.LargeBullets) {
             ProcessSingleShot();
         }
-        else {
+        else if(ammoType == AmmoType.Shells) {
             ProcessShotgunSpread();
         }
     }
@@ -65,17 +65,17 @@ public class Weapon : MonoBehaviour {
         if(Input.GetButtonUp("Fire1")) {
             gunAnimator.SetBool(FIRING_BOOL, false);
             // To protect against null reference
-            if(ammoSlot.GetCurrentAmount() > 0) {
+            if(ammoSlot.GetCurrentAmount(ammoType) > 0) {
                 StopCoroutine(firingCorutine);
             }
         }
     }
 
     private void ProcessSingleShot() {
-        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount() > 0)) {
+        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount(ammoType) > 0)) {
             PlayFX();
             ProcessShot();
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
             canFire = false;
             StartCoroutine(DelayFire());
         }
@@ -85,14 +85,14 @@ public class Weapon : MonoBehaviour {
     }
 
     private void ProcessShotgunSpread() {
-        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount() > 0)) {
+        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount(ammoType) > 0)) {
             PlayFX();
 
             for(int i = 0; i < 6; i++) {
                 ProcessShot();
             }
 
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
             canFire = false;
             StartCoroutine(DelayFire());
         }
@@ -139,14 +139,14 @@ public class Weapon : MonoBehaviour {
     IEnumerator FireContinuously() {
         while(true) { // Infinite loop to always fire while button held, but delay by a specified amount
 
-            if(ammoSlot.GetCurrentAmount() <= 0) {
+            if(ammoSlot.GetCurrentAmount(ammoType) <= 0) {
                 gunAnimator.SetBool(FIRING_BOOL, false);
                 yield break;
             }
 
             PlayFX();
             ProcessShot();
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
             yield return new WaitForSeconds(timeBetweenShots);
         }
     }

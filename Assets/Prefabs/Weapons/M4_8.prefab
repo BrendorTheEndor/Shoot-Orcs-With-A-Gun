@@ -119,12 +119,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonCamera: {fileID: 0}
   ammoSlot: {fileID: 0}
+  ammoType: 1
   weaponRange: 200
-  minWeaponDamagePerShot: 20
-  maxWeaponDamagePerShot: 30
-  shotDeviationFactor: 0.015
+  minWeaponDamagePerShot: 30
+  maxWeaponDamagePerShot: 40
+  shotDeviationFactor: 0.01
   timeBetweenShots: 0.5
-  weaponType: 1
   muzzleFlash: {fileID: 6406995108465712377}
   fireSFX: {fileID: 8300000, guid: 036aaecdebd3bc2419399f49625e818f, type: 3}
   fireVolume: 0.3
