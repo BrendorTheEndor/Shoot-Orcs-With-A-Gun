@@ -18,8 +18,11 @@ public class Weapon : MonoBehaviour {
     // Used to cap fire rate
     Coroutine firingCorutine;
 
+    // Used for animations
+    const string FIRING_BOOL = "isShooting";
+
     void Start() {
-        GetComponent<Animator>().SetBool("isShooting", false);
+        GetComponent<Animator>().SetBool(FIRING_BOOL, false);
     }
 
     void Update() {
@@ -27,18 +30,13 @@ public class Weapon : MonoBehaviour {
             firingCorutine = StartCoroutine(FireContinuously());
         }
         if(Input.GetButtonUp("Fire1")) {
-            GetComponent<Animator>().SetBool("isShooting", false);
+            GetComponent<Animator>().SetBool(FIRING_BOOL, false);
             StopCoroutine(firingCorutine);
         }
     }
 
-    private void Shoot() {
-        PlayVFX();
-        ProccessShot();
-    }
-
-    private void PlayVFX() {
-        GetComponent<Animator>().SetBool("isShooting", true);
+    private void PlayFX() {
+        GetComponent<Animator>().SetBool(FIRING_BOOL, true);
         muzzleFlash.Play();
         //bulletTrail.Play();
         AudioSource.PlayClipAtPoint(fireSFX, Camera.main.transform.position, fireVolume);
@@ -65,8 +63,8 @@ public class Weapon : MonoBehaviour {
     }
 
     IEnumerator FireContinuously() {
-        while(true) { // Infinite loop to always fire while button held
-            PlayVFX();
+        while(true) { // Infinite loop to always fire while button held, but delay by a specified amount
+            PlayFX();
             ProccessShot();
             yield return new WaitForSeconds(timeBetweenShots);
         }
