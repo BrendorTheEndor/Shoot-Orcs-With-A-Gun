@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Might be worth it to refactor this into a different script for each weapon type
 public class Weapon : MonoBehaviour {
 
     [Header("General Reference")]
@@ -36,6 +37,13 @@ public class Weapon : MonoBehaviour {
     void Start() {
         gunAnimator = GetComponent<Animator>();
         gunAnimator.SetBool(FIRING_BOOL, false);
+    }
+
+    // Just used for weapon switching
+    private void OnEnable() {
+        gunAnimator = GetComponent<Animator>();
+        gunAnimator.SetBool(FIRING_BOOL, false);
+        canFire = true;
     }
 
     void Update() {

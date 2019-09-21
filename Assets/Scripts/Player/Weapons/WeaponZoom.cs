@@ -6,18 +6,16 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class WeaponZoom : MonoBehaviour {
 
     [SerializeField] Camera mainCamera;
+    [SerializeField] RigidbodyFirstPersonController playerController;
     [SerializeField] float zoomAmount = 60f;
     [SerializeField] float zoomPerFrame = 5f;
     [SerializeField] float lowestSensitivity = .5f;
-
-    RigidbodyFirstPersonController playerController;
 
     float initialFOV;
     float initialSensitivity;
 
     void Start() {
         initialFOV = mainCamera.fieldOfView;
-        playerController = GetComponent<RigidbodyFirstPersonController>();
         initialSensitivity = playerController.mouseLook.XSensitivity;
     }
 

@@ -13,6 +13,7 @@ public class DeathHandler : MonoBehaviour {
     public void HandleDeath() {
         gameOverCanvas.enabled = true;
         Time.timeScale = 0;
+        FindObjectOfType<WeaponSwitcher>().enabled = false; // prevents weird post mortem weapon switching
         Cursor.lockState = CursorLockMode.None; // Don't lock the cursor anymore, basically let the people click the buttons
         Cursor.visible = true;
     }
