@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] float timeBetweenShots = 1f;
 
     [Header("Effects")]
+    [SerializeField] int weaponType = 0;
     [SerializeField] ParticleSystem muzzleFlash;
     //[SerializeField] ParticleSystem bulletTrail;
     [SerializeField] AudioClip fireSFX;
@@ -26,20 +27,35 @@ public class Weapon : MonoBehaviour {
 
     // Used to cap fire rate
     Coroutine firingCorutine;
+    Animator gunAnimator;
+    bool canFire = true;
 
     // Used for animations
     const string FIRING_BOOL = "isShooting";
 
     void Start() {
-        GetComponent<Animator>().SetBool(FIRING_BOOL, false);
+        gunAnimator = GetComponent<Animator>();
+        gunAnimator.SetBool(FIRING_BOOL, false);
     }
 
     void Update() {
+        if(weaponType == 0) {
+            ProcessAutoFire();
+        }
+        else if(weaponType == 1) {
+            ProcessSingleShot();
+        }
+        else {
+            ProcessShotgunSpread();
+        }
+    }
+
+    private void ProcessAutoFire() {
         if(Input.GetButtonDown("Fire1")) {
             firingCorutine = StartCoroutine(FireContinuously());
         }
         if(Input.GetButtonUp("Fire1")) {
-            GetComponent<Animator>().SetBool(FIRING_BOOL, false);
+            gunAnimator.SetBool(FIRING_BOOL, false);
             // To protect against null reference
             if(ammoSlot.GetCurrentAmount() > 0) {
                 StopCoroutine(firingCorutine);
@@ -47,16 +63,46 @@ public class Weapon : MonoBehaviour {
         }
     }
 
+    private void ProcessSingleShot() {
+        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount() > 0)) {
+            PlayFX();
+            ProcessShot();
+            ammoSlot.ReduceCurrentAmmo();
+            canFire = false;
+            StartCoroutine(DelayFire());
+        }
+        else {
+            gunAnimator.SetBool(FIRING_BOOL, false);
+        }
+    }
+
+    private void ProcessShotgunSpread() {
+        if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount() > 0)) {
+            PlayFX();
+
+            for(int i = 0; i < 6; i++) {
+                ProcessShot();
+            }
+
+            ammoSlot.ReduceCurrentAmmo();
+            canFire = false;
+            StartCoroutine(DelayFire());
+        }
+        else {
+            gunAnimator.SetBool(FIRING_BOOL, false);
+        }
+    }
+
+    // Methods both auto fire and single shot need
+
     private void PlayFX() {
-        GetComponent<Animator>().SetBool(FIRING_BOOL, true);
+        gunAnimator.SetBool(FIRING_BOOL, true);
         muzzleFlash.Play();
         //bulletTrail.Play();
         AudioSource.PlayClipAtPoint(fireSFX, Camera.main.transform.position, fireVolume);
     }
 
-    private void ProccessShot() {
-
-        ammoSlot.ReduceCurrentAmmo();
+    private void ProcessShot() {
 
         // What we hit with the cast
         RaycastHit hit;
@@ -80,17 +126,27 @@ public class Weapon : MonoBehaviour {
         Destroy(impact, .1f);
     }
 
+    // Only auto fire
+
     IEnumerator FireContinuously() {
         while(true) { // Infinite loop to always fire while button held, but delay by a specified amount
 
             if(ammoSlot.GetCurrentAmount() <= 0) {
-                GetComponent<Animator>().SetBool(FIRING_BOOL, false);
+                gunAnimator.SetBool(FIRING_BOOL, false);
                 yield break;
             }
 
             PlayFX();
-            ProccessShot();
+            ProcessShot();
+            ammoSlot.ReduceCurrentAmmo();
             yield return new WaitForSeconds(timeBetweenShots);
         }
+    }
+
+    // Only single shot
+
+    IEnumerator DelayFire() {
+        yield return new WaitForSeconds(timeBetweenShots);
+        canFire = true;
     }
 }
