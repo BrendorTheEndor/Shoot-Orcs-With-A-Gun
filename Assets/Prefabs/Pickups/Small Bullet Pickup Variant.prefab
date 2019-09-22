@@ -705,11 +705,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 962684968087586253, guid: 7688c49260af39d4b8a6b04d9df5cd32,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6923895881143095656, guid: 7688c49260af39d4b8a6b04d9df5cd32,
         type: 3}
       propertyPath: ammoType
@@ -718,7 +713,12 @@ PrefabInstance:
     - target: {fileID: 6923895881143095656, guid: 7688c49260af39d4b8a6b04d9df5cd32,
         type: 3}
       propertyPath: pickupAmount
-      value: 20
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 962684968087586253, guid: 7688c49260af39d4b8a6b04d9df5cd32,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7688c49260af39d4b8a6b04d9df5cd32, type: 3}

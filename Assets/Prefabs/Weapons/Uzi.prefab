@@ -433,8 +433,8 @@ MonoBehaviour:
   ammoSlot: {fileID: 0}
   ammoType: 0
   weaponRange: 100
-  minWeaponDamagePerShot: 7
-  maxWeaponDamagePerShot: 12
+  minWeaponDamagePerShot: 12
+  maxWeaponDamagePerShot: 15
   shotDeviationFactor: 0.035
   timeBetweenShots: 0.1
   muzzleFlash: {fileID: 7362133435112530449}
@@ -442,6 +442,7 @@ MonoBehaviour:
   fireVolume: 0.2
   hitEffect: {fileID: 4011150849173650189, guid: 007ab3f6c5dca67458f1de4c18a1705f,
     type: 3}
+  ammoDisplayText: {fileID: 0}
 --- !u!1 &5934879789963800974
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +528,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5930757513950120754}
     m_Modifications:
+    - target: {fileID: 7769911470494945403, guid: 7dd2db490bc971a4da26b280874b8635,
+        type: 3}
+      propertyPath: m_Name
+      value: Muzzle Flash VFX
+      objectReference: {fileID: 0}
     - target: {fileID: 7769911470494945380, guid: 7dd2db490bc971a4da26b280874b8635,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -581,11 +587,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769911470494945403, guid: 7dd2db490bc971a4da26b280874b8635,
-        type: 3}
-      propertyPath: m_Name
-      value: Muzzle Flash VFX
       objectReference: {fileID: 0}
     - target: {fileID: 7769911470494945381, guid: 7dd2db490bc971a4da26b280874b8635,
         type: 3}

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5026610653445482798}
   - component: {fileID: 1408687413}
   - component: {fileID: 1961028362649187421}
-  - component: {fileID: 7931113946246300563}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -101,7 +100,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.11
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -159,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a8dbb6193e1b242950a463f1edee26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 100
+  hitPoints: 200
 --- !u!114 &1961028362649187421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,22 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToDeal: 40
   attackSound: {fileID: 8300000, guid: f8cc4a9690465a1488495075c98198a5, type: 3}
---- !u!54 &7931113946246300563
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2992417023796371448}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &3698599926831959800
 PrefabInstance:
   m_ObjectHideFlags: 0

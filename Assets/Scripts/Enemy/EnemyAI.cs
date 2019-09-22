@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour {
 
-    // The target to chase
-    [SerializeField] Transform target;
     // The distance from the player the enemy needs to be to activate AI
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float turnSpeed = 5f;
@@ -15,6 +13,7 @@ public class EnemyAI : MonoBehaviour {
     float distanceToTarget = Mathf.Infinity;
     bool enemyTriggered = false;
 
+    Transform target;
     NavMeshAgent myNavMeshAgent;
     Animator myAnimator;
     EnemyHealth enemyHealth;
@@ -28,6 +27,7 @@ public class EnemyAI : MonoBehaviour {
         myNavMeshAgent = GetComponent<NavMeshAgent>();
         myAnimator = GetComponent<Animator>();
         enemyHealth = GetComponent<EnemyHealth>();
+        target = FindObjectOfType<PlayerHealth>().transform;
     }
 
     // If target not in range, do nothing, if target is in range, then chase (can't unaggro)

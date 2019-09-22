@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // TODO: Might be worth it to refactor this into a different script for each weapon type
 public class Weapon : MonoBehaviour {
@@ -20,10 +21,10 @@ public class Weapon : MonoBehaviour {
 
     [Header("Effects")]
     [SerializeField] ParticleSystem muzzleFlash;
-    //[SerializeField] ParticleSystem bulletTrail;
     [SerializeField] AudioClip fireSFX;
     [SerializeField] float fireVolume = 1f;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] TextMeshProUGUI ammoDisplayText;
 
 
     // Used to cap fire rate
@@ -33,6 +34,8 @@ public class Weapon : MonoBehaviour {
 
     // Used for animations
     const string FIRING_BOOL = "isShooting";
+
+    //------------------------------------------------------------------------------------------------------------------------
 
     void Start() {
         gunAnimator = GetComponent<Animator>();
@@ -47,6 +50,9 @@ public class Weapon : MonoBehaviour {
     }
 
     void Update() {
+
+        DisplayAmmo();
+
         if(ammoType == AmmoType.SmallBullets) {
             ProcessAutoFire();
         }
@@ -57,6 +63,10 @@ public class Weapon : MonoBehaviour {
             ProcessShotgunSpread();
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------
+
+    // Process the different firing types
 
     private void ProcessAutoFire() {
         if(Input.GetButtonDown("Fire1")) {
@@ -101,12 +111,13 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    // Methods both auto fire and single shot need
+    //------------------------------------------------------------------------------------------------------------------------
+
+    // Methods all types need
 
     private void PlayFX() {
         gunAnimator.SetBool(FIRING_BOOL, true);
         muzzleFlash.Play();
-        //bulletTrail.Play();
         AudioSource.PlayClipAtPoint(fireSFX, Camera.main.transform.position, fireVolume);
     }
 
@@ -134,6 +145,12 @@ public class Weapon : MonoBehaviour {
         Destroy(impact, .1f);
     }
 
+    private void DisplayAmmo() {
+        ammoDisplayText.text = ammoSlot.GetCurrentAmount(ammoType).ToString();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------
+
     // Only auto fire
 
     IEnumerator FireContinuously() {
@@ -150,6 +167,8 @@ public class Weapon : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenShots);
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------
 
     // Only single shot
 
