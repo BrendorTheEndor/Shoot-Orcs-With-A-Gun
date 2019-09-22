@@ -44,5 +44,7 @@ public class WeaponZoom : MonoBehaviour {
 
     private void OnDisable() {
         mainCamera.fieldOfView = initialFOV;
+        playerController.mouseLook.XSensitivity = initialSensitivity;
+        playerController.mouseLook.YSensitivity = initialSensitivity;
     }
 }
