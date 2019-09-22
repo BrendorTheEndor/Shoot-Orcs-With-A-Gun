@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour {
 
     NavMeshAgent myNavMeshAgent;
     Animator myAnimator;
+    EnemyHealth enemyHealth;
 
     // string refs for animator
     const string CHASE_TRIGGER = "beginChase";
@@ -26,10 +27,17 @@ public class EnemyAI : MonoBehaviour {
     void Start() {
         myNavMeshAgent = GetComponent<NavMeshAgent>();
         myAnimator = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     // If target not in range, do nothing, if target is in range, then chase (can't unaggro)
     void Update() {
+        if(enemyHealth.IsDead()) {
+            enabled = false; // Turns off this component
+            myNavMeshAgent.enabled = false; // Turns off the rotation
+            return;
+        }
+
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if(distanceToTarget <= chaseRange) {
             enemyTriggered = true;
