@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5026610653445482798}
   - component: {fileID: 1408687413}
   - component: {fileID: 1961028362649187421}
+  - component: {fileID: 7931113946246300563}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -172,6 +173,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToDeal: 40
+  attackSound: {fileID: 8300000, guid: f8cc4a9690465a1488495075c98198a5, type: 3}
+--- !u!54 &7931113946246300563
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992417023796371448}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3698599926831959800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,41 +292,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 92.3653
       objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.034726758
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.6784262
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.39865255
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.61612344
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12.087486
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 39.59919
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -88.48512
-      objectReference: {fileID: 0}
     - target: {fileID: 8814982892686701646, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -343,6 +326,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 85.16347
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.034726758
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6784262
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.39865255
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.61612344
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.087486
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 39.59919
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556732431792320495, guid: 176299a76ecfc7544b22a66fae200ac7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -88.48512
       objectReference: {fileID: 0}
     - target: {fileID: 4519494679898858142, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}

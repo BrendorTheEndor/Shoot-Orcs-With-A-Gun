@@ -1,20 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour {
 
     PlayerHealth target;
     [SerializeField] float damageToDeal = 40f;
+    [SerializeField] AudioClip attackSound;
 
     void Start() {
         target = FindObjectOfType<PlayerHealth>();
     }
 
+    public void PlayAttackSound() {
+        AudioSource.PlayClipAtPoint(attackSound, transform.position);
+    }
+
     public void AttackHitEvent() {
         if(target == null) { return; }
         Debug.Log("attack event triggered");
-        // TODO check the distance from the player, and make it miss if they aren't close enough. Also, a sound effect for when an attack lands would be good feedback
-        target.TakeDamage(damageToDeal);
+
+        // Makes sure you are actually still in range to get hit
+        if(Vector3.Distance(transform.position, target.GetComponent<Transform>().position) <= GetComponent<NavMeshAgent>().stoppingDistance) {
+            target.TakeDamage(damageToDeal);
+            Debug.Log("damage taken");
+        }
+        else {
+            Debug.Log("attack whiffed");
+        }
     }
 }

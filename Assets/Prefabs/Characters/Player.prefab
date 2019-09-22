@@ -317,6 +317,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 100
+  painGrunts:
+  - {fileID: 8300000, guid: 9af76ac715fe51f4baf8e717da0e31b8, type: 3}
+  - {fileID: 8300000, guid: 53340ad1521a9dd4c91f80034e4ddef8, type: 3}
+  - {fileID: 8300000, guid: e74014015a9eee144afaa27a73db9d9a, type: 3}
+  - {fileID: 8300000, guid: 27effdb2fe0d3e941a5fe6601db5e6cb, type: 3}
+  - {fileID: 8300000, guid: 82137b7428d9baa45a9c0fff35fc077d, type: 3}
+  - {fileID: 8300000, guid: 24373d0dc0408cb4dae3169e07722bd3, type: 3}
+  - {fileID: 8300000, guid: 1d5a3134c4cda594e906529aa633bd06, type: 3}
+  - {fileID: 8300000, guid: 4bc49549da7bbe8459765c8417402508, type: 3}
 --- !u!114 &3207930614789600414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +612,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 342615212078818854}
     m_Modifications:
+    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
+        type: 3}
+      propertyPath: m_Name
+      value: Uzi
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5930757513950120754, guid: a2947cb00894fc5458deb0f343308a31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -657,16 +676,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.096
-      objectReference: {fileID: 0}
-    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
-        type: 3}
-      propertyPath: m_Name
-      value: Uzi
-      objectReference: {fileID: 0}
-    - target: {fileID: 5934833551101817520, guid: a2947cb00894fc5458deb0f343308a31,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894669885966836444, guid: a2947cb00894fc5458deb0f343308a31,
         type: 3}
