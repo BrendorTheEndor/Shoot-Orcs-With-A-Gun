@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Single class to handle all ammo types, placed on the player, rather than on each weapon
 public class Ammo : MonoBehaviour {
 
+    // Slots for each type of ammo
     [SerializeField] AmmoSlot[] ammoSlots;
 
     [System.Serializable]

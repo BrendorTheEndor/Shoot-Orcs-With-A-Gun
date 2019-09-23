@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Script to handle enemy AI and pathing
 public class EnemyAI : MonoBehaviour {
 
     // The distance from the player the enemy needs to be to activate AI
@@ -34,7 +35,7 @@ public class EnemyAI : MonoBehaviour {
     void Update() {
         if(enemyHealth.IsDead()) {
             enabled = false; // Turns off this component
-            myNavMeshAgent.enabled = false; // Turns off the rotation
+            myNavMeshAgent.enabled = false; // Disables movement
             return;
         }
 
@@ -43,15 +44,16 @@ public class EnemyAI : MonoBehaviour {
             enemyTriggered = true;
         }
         if(enemyTriggered) {
-            TriggerEnemy();
+            PursuePlayer();
         }
     }
 
+    // Triggers enemy if damage is taken, is called from a separate script which deals with enemy health
     public void OnDamageTaken() {
         enemyTriggered = true;
     }
 
-    private void TriggerEnemy() {
+    private void PursuePlayer() {
 
         FaceTaget();
 
@@ -61,6 +63,13 @@ public class EnemyAI : MonoBehaviour {
         if(distanceToTarget <= myNavMeshAgent.stoppingDistance) {
             AttackTarget();
         }
+    }
+
+    // Changes the rotation of the enemy to face the target
+    private void FaceTaget() {
+        Vector3 direction = (target.position - transform.position).normalized; // Get the direction to face
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Find the rotation to look in
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed); // Gradually turn to that rotation
     }
 
     private void ChaseTarget() {
@@ -79,10 +88,4 @@ public class EnemyAI : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 
-    // Changes the rotation of the enemy to face the target
-    private void FaceTaget() {
-        Vector3 direction = (target.position - transform.position).normalized; // Get the direction to face
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Find the rotation to look in
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed); // Gradually turn to that rotation
-    }
 }

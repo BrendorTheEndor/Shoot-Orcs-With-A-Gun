@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// TODO: Might be worth it to refactor this into a different script for each weapon type
+/* Script applied to each weapon the player can use; handles several types of weapons
+ * Somewhat light on comments, but the method/variable names are intentionally very descriptive as to be self-commenting
+ */
 public class Weapon : MonoBehaviour {
 
     [Header("General Reference")]
@@ -98,6 +100,7 @@ public class Weapon : MonoBehaviour {
         if(Input.GetButtonDown("Fire1") && canFire && (ammoSlot.GetCurrentAmount(ammoType) > 0)) {
             PlayFX();
 
+            // Loops 6 times to fire 6 random spread shots
             for(int i = 0; i < 6; i++) {
                 ProcessShot();
             }
@@ -126,15 +129,16 @@ public class Weapon : MonoBehaviour {
         // What we hit with the cast
         RaycastHit hit;
 
+        // Gets a random Vector3 to add to the center of the screen, so that not all shots are 100% accurate
         Vector3 shotDeviation = new Vector3(UnityEngine.Random.Range(-shotDeviationFactor, shotDeviationFactor),
             UnityEngine.Random.Range(-shotDeviationFactor, shotDeviationFactor), UnityEngine.Random.Range(-shotDeviationFactor, shotDeviationFactor));
 
         // First is where to shoot the ray from, next is what direction, then what we hit, and finally the range
-        if(Physics.Raycast(firstPersonCamera.transform.position, firstPersonCamera.transform.forward + shotDeviation, out hit, weaponRange)) { // If we hit something
+        if(Physics.Raycast(firstPersonCamera.transform.position, firstPersonCamera.transform.forward + shotDeviation, out hit, weaponRange)) { // If we hit something, and assigns this to "hit"
             CreateHitImpact(hit);
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
             if(target == null) { return; } // protects against null reference
-            target.TakeDamage(UnityEngine.Random.Range(minWeaponDamagePerShot, maxWeaponDamagePerShot));
+            target.TakeDamage(UnityEngine.Random.Range(minWeaponDamagePerShot, maxWeaponDamagePerShot)); // Simple damage spread
         }
         else { return; } // protects against null reference
     }
@@ -156,6 +160,7 @@ public class Weapon : MonoBehaviour {
     IEnumerator FireContinuously() {
         while(true) { // Infinite loop to always fire while button held, but delay by a specified amount
 
+            // Used to prevent the firing animation from continuing if ammo runs out and the button is still held down
             if(ammoSlot.GetCurrentAmount(ammoType) <= 0) {
                 gunAnimator.SetBool(FIRING_BOOL, false);
                 yield break;
