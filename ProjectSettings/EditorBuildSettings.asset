@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Start Menu.unity
+    guid: 7d6729cdf747e494b9f848c3ea37019f
+  - enabled: 1
+    path: Assets/Scenes/Abandoned Castle.unity
+    guid: a62dad40eddb9bc4bb663f1766e84273
+  - enabled: 1
+    path: Assets/Scenes/Win Screen.unity
+    guid: 7fcfc63dde00f2046a9b76517ac58763
   m_configObjects: {}
